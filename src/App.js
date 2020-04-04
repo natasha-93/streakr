@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { eachDayOfInterval } from "date-fns";
+import Day from './Day'
+
 
 function App() {
+  const [dates, setDates] = useState(eachDayOfInterval({
+    start: new Date(2020, 3, 1),
+    end: new Date(2020, 3, 30)
+  }))
+  console.log(dates)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
+      {dates.map((date) => {
+        return <Day key={date} date={date} />
+      })}
+
     </div>
   );
 }
